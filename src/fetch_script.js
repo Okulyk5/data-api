@@ -23,7 +23,7 @@ const main = async () => {
   //   },
   // });
   // const assetsSymbols = res1.data;
-  const assetSymbols = [
+  const assetsSymbols = [
     "ETH",
     "WBTC",
     "LINK",
