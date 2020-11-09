@@ -1,0 +1,10 @@
+{
+  "name": "data-api",
+  "version": "0.0.1",
+  "description": "Provides aggregate data via Rest API",
+  "main": "index.js",
+  "repository": "git@github.com:KEYFIAI/data-api.git",
+  "author": "altninja <ben@grvs.io>",
+  "license": "",
+  "private": true
+}
