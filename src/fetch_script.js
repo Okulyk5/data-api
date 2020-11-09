@@ -4,8 +4,8 @@ const mongoose = require('mongoose');
 
 const { assetScheme, rateScheme } = require('./db');
 
-const defiApiKey = process.env.DEFI_API_KEY;
-const mongoUrl = process.env.MONGODB_URI || 'mongodb://127.0.0.1/data-api';
+const defiApiKey = process.env.KEYFI_DEFIPULSE_API_KEY;
+const mongoUrl = process.env.KEYFI_MONGODB_URI || 'mongodb://127.0.0.1/data-api';
 const investAmount = 1000;
 
 const Asset = mongoose.model('Asset', assetScheme);
