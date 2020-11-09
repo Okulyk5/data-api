@@ -17,12 +17,23 @@ const main = async () => {
   // Refetch assets
   await Asset.deleteMany({});
 
-  const res1 = await axios.get('https://public.defipulse.com/api/GetLendingTokens', {
-    params: {
-      'api-key': defiApiKey,
-    },
-  });
-  const assetsSymbols = res1.data;
+  // const res1 = await axios.get('https://public.defipulse.com/api/GetLendingTokens', {
+  //   params: {
+  //     'api-key': defiApiKey,
+  //   },
+  // });
+  // const assetsSymbols = res1.data;
+  const assetSymbols = [
+    "ETH",
+    "WBTC",
+    "LINK",
+    "BAT",
+    "USDC",
+    "DAI",
+    "TUSD",
+    "USDT",
+    "SUSD"
+  ]
   await Asset.insertMany(assetsSymbols.map((symbol) => new Asset({ symbol })));
 
   // Refetch rates for all symbols
