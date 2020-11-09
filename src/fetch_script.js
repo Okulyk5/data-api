@@ -1,4 +1,4 @@
-require('dotenv/config');
+// require('dotenv/config');
 const axios = require('axios');
 const mongoose = require('mongoose');
 
@@ -42,12 +42,12 @@ const main = async () => {
   for (const symbol of assetsSymbols) {
     console.log(`Process asset: '${symbol}'`);
 
-    const { data } = await axios.get('https://public.defipulse.com/api/GetRates', {
-      params: {
-        token: symbol,
-        amount: investAmount,
-        'api-key': defiApiKey,
-      },
+    const { data } = await axios.get('https://public.defipulse.com/api/GetRates?token=' + symbol + '&api-key=' + defiApiKey, {
+      // params: {
+      //   token: symbol,
+      //   amount: investAmount,
+      //   'api-key': defiApiKey,
+      // },
     });
 
     await Rate.insertMany(Object.values(data.rates).map(
