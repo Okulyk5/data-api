@@ -1,4 +1,5 @@
 require('dotenv/config');
+const cors = require('cors');
 const express = require('express');
 const mongoose = require('mongoose');
 
@@ -10,6 +11,8 @@ const mongoUrl = process.env.MONGODB_URI || 'mongodb://127.0.0.1/data-api';
 
 const Asset = mongoose.model('Asset', assetScheme);
 const Rate = mongoose.model('Rate', rateScheme);
+
+app.use(cors('*'));
 
 app.get('/', (req, res) => {
   res.send('It works!');
