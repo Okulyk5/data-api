@@ -5,12 +5,13 @@ const mongoose = require('mongoose');
 
 const { assetScheme, rateScheme } = require('./db');
 
-const app = express();
 const port = process.env.PORT || 3000;
 const mongoUrl = process.env.MONGODB_URI || 'mongodb://127.0.0.1/data-api';
 
 const Asset = mongoose.model('Asset', assetScheme);
 const Rate = mongoose.model('Rate', rateScheme);
+
+const app = express();
 
 app.use(cors('*'));
 

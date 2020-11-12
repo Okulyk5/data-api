@@ -15,8 +15,6 @@ const main = async () => {
   await mongoose.connect(mongoUrl, { useNewUrlParser: true });
 
   // Refetch assets
-  await Asset.deleteMany({});
-
   // const res1 = await axios.get('https://public.defipulse.com/api/GetLendingTokens', {
   //   params: {
   //     'api-key': defiApiKey,
@@ -24,32 +22,40 @@ const main = async () => {
   // });
   // const assetsSymbols = res1.data;
   const assetsSymbols = [
-    "ETH",
-    "WBTC",
-    "LINK",
-    "BAT",
-    "USDC",
-    "DAI",
-    "TUSD",
-    "USDT",
-    "SUSD"
-  ]
+    'ETH',
+    'WBTC',
+    'LINK',
+    'BAT',
+    'USDC',
+    'DAI',
+    'TUSD',
+    'USDT',
+    'SUSD',
+  ];
+  await Asset.deleteMany({});
   await Asset.insertMany(assetsSymbols.map((symbol) => new Asset({ symbol })));
 
   // Refetch rates for all symbols
-  await Rate.deleteMany({});
 
   for (const symbol of assetsSymbols) {
     console.log(`Process asset: '${symbol}'`);
 
-    const { data } = await axios.get('https://public.defipulse.com/api/GetRates?token=' + symbol + '&api-key=' + defiApiKey, {
-      // params: {
-      //   token: symbol,
-      //   amount: investAmount,
-      //   'api-key': defiApiKey,
-      // },
-    });
+    const { data, status } = await axios.get(
+      'https://public.defipulse.com/api/GetRates',
+      {
+        params: {
+          token: symbol,
+          amount: investAmount,
+          'api-key': defiApiKey,
+        },
+      },
+    );
 
+    if (status !== 200) {
+      throw new Error(`Bad response from defi: status=${status}`);
+    }
+
+    await Rate.deleteMany({ asset: symbol });
     await Rate.insertMany(Object.values(data.rates).map(
       (platform) => new Rate({
         asset: data.token.name,
@@ -65,7 +71,10 @@ const main = async () => {
   await mongoose.connection.close();
 };
 
-main().catch((error) => {
-  mongoose.connection.close();
+main().catch(async (error) => {
   console.error('FATAL ERROR:', error);
+  await mongoose.connection.close();
+  process.exit(1);
+}).then(() => {
+  console.log('Done!');
 });
