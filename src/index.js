@@ -16,8 +16,13 @@ const app = express();
 app.use(cors('*'));
 
 app.get('/', (req, res) => {
-  res.send('It works!');
+  res.send('API Status: OK');
 });
+
+app.use(require('./routes/auth'))
+app.use(require('./routes/alerts'))
+app.use(require('./routes/data'))
+
 
 app.get('/assets', async (req, res) => {
   const assets = await Asset.find();
