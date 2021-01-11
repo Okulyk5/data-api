@@ -1,10 +1,12 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const logger = require('morgan')
+const cors = require('cors')
 
 require('./db/mongoose')
 
 const app = express()
+app.use(cors('*'))
 
 app.set('port', 3001)
 app.use(logger('dev'))
