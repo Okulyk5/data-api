@@ -6,7 +6,7 @@ require('./db/mongoose')
 
 const app = express()
 
-app.set('port', 8080)
+app.set('port', 3001)
 app.use(logger('dev'))
 app.use(bodyParser.json({limit: '50mb'}))
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true }))

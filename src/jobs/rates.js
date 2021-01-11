@@ -1,7 +1,7 @@
 const axios = require('axios');
 const mongoose = require('mongoose');
 
-const defiApiKey = process.env.RECON_DEFI_PULSE_API_KEY;
+const defiApiKey = process.env.KEYFI_DEFIPULSE_API_KEY;
 const mongoUrl = process.env.KEYFI_MONGODB_URI || 'mongodb://127.0.0.1/data-api';
 const investAmount = 1000;
 
