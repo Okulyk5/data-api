@@ -27,7 +27,7 @@ const main = async () => {
     'DAI',
     'TUSD',
     'USDT',
-    'SUSD',
+    'sUSD',
   ];
   await Asset.deleteMany({});
   await Asset.insertMany(assetsSymbols.map((symbol) => new Asset({ symbol })));
