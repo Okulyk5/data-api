@@ -24,13 +24,13 @@ bot.catch((error) => {
 bot.launch();
 
 
-const sendApplyNotification = (address) => {
+const sendApplyNotification = async (address) => {
   if (!telegramUsers) {
     console.error('No users specified for notification!');
     return;
   }
   for (const userId of telegramUsers) {
-    return bot.telegram.sendMessage(userId, `${address} applied for whitelist`);
+    await bot.telegram.sendMessage(userId, `${address} applied for whitelist`);
   }
 };
 
