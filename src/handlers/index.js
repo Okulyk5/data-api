@@ -11,13 +11,17 @@
 
 exports.response = async (res, data) => {
 	if (data === null) {
-		return res.status(404).json({"message": "Item Not Found"})
+		return res.status(404).json({'message': 'Item Not Found'});
 	} else {
-		return res.status(200).json(data)
+		return res.status(200).json(data);
 	}
-}
+};
+
+exports.unauthorized = async (res) => {
+	return res.status(401).json({ 'message': 'Unauthorized' });
+};
 
 exports.error = async (res, e) => {
-	console.error(e)
-	return res.status(500).json(e)
-}
+	console.error(e);
+	return res.status(500).json(e);
+};
